@@ -6,6 +6,7 @@ This directory contains the code for the Llama with LoRA fine-tuning experiment 
 - Llama 3.2 3B model specification can be found [here](https://huggingface.co/meta-llama/Llama-3.2-3B).
 - Llama 3.1 8B model specification can be found [here](https://huggingface.co/meta-llama/Llama-3.1-8B).
 - Llama 3.1 70B model specification can be found [here](https://huggingface.co/meta-llama/Llama-3.1-70B)
+- Llama 3.3 70B Instruct model specification can be found [here](https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct).
 
 Original LoRA paper can be found [here](https://arxiv.org/pdf/2106.09685).
 
@@ -135,6 +136,27 @@ python3 blacksmith/experiments/torch/llama/xla/test_llama_fine_tuning_pure_torch
 | [Blackhole LoudBox](loudbox/test_llama_3_1_70b.yaml) | `[2, 4]`   | `["model", "batch"]`| SST2    | LoRA   |
 | [Galaxy](galaxy/test_llama_3_1_70b.yaml) | `[4, 8]`   | `["model", "batch"]` | SST2    | LoRA   |
 
+
+### Llama 3.3 70B Instruct Training
+
+**Llama 3.3 70B Instruct requires multi-chip configurations (not supported on single chip) and must be model sharded (model dimension > 1).**
+
+**LoudBox Training:**
+```bash
+python3 blacksmith/experiments/torch/llama/xla/test_llama_fine_tuning_pure_torch.py --config blacksmith/experiments/torch/llama/xla/lora/loudbox/test_llama_3_3_70b_instruct.yaml
+```
+
+**Galaxy Training:**
+```bash
+python3 blacksmith/experiments/torch/llama/xla/test_llama_fine_tuning_pure_torch.py --config blacksmith/experiments/torch/llama/xla/lora/galaxy/test_llama_3_3_70b_instruct.yaml
+```
+
+#### Llama 3.3 70B Instruct Training Configurations
+
+| Architecture       | mesh_shape | mesh_axis_names                          | dataset | Method |
+| ------------------ | ---------- | ---------------------------------------- | ------- | ------ |
+| [Blackhole LoudBox](loudbox/test_llama_3_3_70b_instruct.yaml) | `[2, 4]`   | `["model", "batch"]`                      | Alpaca    | LoRA   |
+| [Wormhole Galaxy](galaxy/test_llama_3_3_70b_instruct.yaml) | `[4, 8]`   | `["model", "batch"]`                      | Alpaca    | LoRA   |
 
 ## Data
 
